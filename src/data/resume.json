@@ -1,0 +1,759 @@
+{
+  "meta": {
+    "ownerName": "Joy Shen",
+    "location": "Taipei, Taiwan",
+    "email": "Joy.shen.dev@example.com",
+    "github": "https://github.com/example/joy-shen",
+    "website": "https://joyShen.dev",
+    "defaultLocale": "zh-TW",
+    "supportedLocales": ["zh-TW", "en-US"],
+    "jobTitle": {
+      "zh-TW": "前端工程師 / HIS 流程系統開發",
+      "en-US": "Frontend Engineer / HIS Workflow Specialist"
+    },
+    "summary": {
+      "zh-TW": "把履歷做成產品，展示的不只 UI，還包含流程、資料模型、權限與可維護性。",
+      "en-US": "This portfolio treats a resume as a product and demonstrates UI, flow design, data modeling, access control, and maintainability."
+    },
+    "introLines": {
+      "zh-TW": ["npm run dev", "載入工程師作品履歷系統...", "展示前端能力 + 實務流程能力"],
+      "en-US": [
+        "npm run dev",
+        "Booting engineer portfolio system...",
+        "Showcasing frontend + workflow delivery"
+      ]
+    }
+  },
+  "security": {
+    "loginPin": "2026",
+    "loginHint": {
+      "zh-TW": "Demo PIN: 2026",
+      "en-US": "Demo PIN: 2026"
+    }
+  },
+  "resumeVersions": [
+    {
+      "id": "frontend",
+      "label": {
+        "zh-TW": "前端版",
+        "en-US": "Frontend"
+      }
+    },
+    {
+      "id": "medical",
+      "label": {
+        "zh-TW": "醫療流程版",
+        "en-US": "Medical Workflow"
+      }
+    },
+    {
+      "id": "global",
+      "label": {
+        "zh-TW": "國際版",
+        "en-US": "Global"
+      }
+    }
+  ],
+  "sectionCatalog": [
+    {
+      "id": "hero",
+      "label": {
+        "zh-TW": "自我介紹",
+        "en-US": "Hero"
+      }
+    },
+    {
+      "id": "skills",
+      "label": {
+        "zh-TW": "技能",
+        "en-US": "Skills"
+      }
+    },
+    {
+      "id": "featuredProjects",
+      "label": {
+        "zh-TW": "精選專案",
+        "en-US": "Featured Projects"
+      }
+    },
+    {
+      "id": "timelinePreview",
+      "label": {
+        "zh-TW": "經歷時間線",
+        "en-US": "Timeline Preview"
+      }
+    }
+  ],
+  "sectionOrder": ["hero", "skills", "featuredProjects", "timelinePreview"],
+  "skillRadar": [
+    {
+      "id": "frontend",
+      "label": {
+        "zh-TW": "前端架構",
+        "en-US": "Frontend Architecture"
+      },
+      "score": 90
+    },
+    {
+      "id": "domain",
+      "label": {
+        "zh-TW": "醫療領域理解",
+        "en-US": "Medical Domain"
+      },
+      "score": 84
+    },
+    {
+      "id": "api",
+      "label": {
+        "zh-TW": "API 整合",
+        "en-US": "API Integration"
+      },
+      "score": 87
+    },
+    {
+      "id": "workflow",
+      "label": {
+        "zh-TW": "流程設計",
+        "en-US": "Workflow Design"
+      },
+      "score": 88
+    },
+    {
+      "id": "quality",
+      "label": {
+        "zh-TW": "品質與維護",
+        "en-US": "Quality & Maintainability"
+      },
+      "score": 82
+    }
+  ],
+  "skills": [
+    {
+      "id": "1",
+      "name": "Vue 3",
+      "category": "frontend"
+    },
+    {
+      "id": "2",
+      "name": "Quasar",
+      "category": "frontend"
+    },
+    {
+      "id": "3",
+      "name": "REST API",
+      "category": "integration"
+    },
+    {
+      "id": "4",
+      "name": "RBAC",
+      "category": "security"
+    },
+    {
+      "id": "5",
+      "name": "i18n",
+      "category": "global"
+    }
+  ],
+  "experiences": [
+    {
+      "id": "exp-01",
+      "start": "2023-08",
+      "end": null,
+      "company": "MedFlow HIS Team",
+      "role": {
+        "zh-TW": "前端工程師",
+        "en-US": "Frontend Engineer"
+      },
+      "summary": {
+        "zh-TW": "主導 HIS 前端模組重構，將病歷表單流程拆分為可配置元件。",
+        "en-US": "Led the HIS frontend refactor and converted clinical form flows into configurable modules."
+      },
+      "highlights": [
+        {
+          "zh-TW": "建立可重用表單引擎，開發效率提升 35%",
+          "en-US": "Built a reusable form engine that improved delivery speed by 35%"
+        },
+        {
+          "zh-TW": "整合 API 權限驗證，降低錯單與誤操作",
+          "en-US": "Integrated permission-aware API workflows to reduce invalid operations"
+        }
+      ]
+    },
+    {
+      "id": "exp-02",
+      "start": "2021-03",
+      "end": "2023-07",
+      "company": "Smart Clinic Platform",
+      "role": {
+        "zh-TW": "前端開發工程師",
+        "en-US": "Frontend Developer"
+      },
+      "summary": {
+        "zh-TW": "負責預約與排程系統 UI，串接院內系統資料並優化使用流程。",
+        "en-US": "Built appointment and scheduling UI and integrated internal hospital systems."
+      },
+      "highlights": [
+        {
+          "zh-TW": "導入狀態看板，客服工單回報時間縮短 25%",
+          "en-US": "Introduced dashboard views and reduced support response time by 25%"
+        }
+      ]
+    },
+    {
+      "id": "exp-03",
+      "start": "2019-05",
+      "end": "2021-02",
+      "company": "Digital Product Lab",
+      "role": {
+        "zh-TW": "前端工程師",
+        "en-US": "Frontend Engineer"
+      },
+      "summary": {
+        "zh-TW": "參與多租戶 SaaS 表單產品，建立共用元件與 i18n 機制。",
+        "en-US": "Contributed to a multi-tenant SaaS form product and built shared UI components with i18n."
+      },
+      "highlights": [
+        {
+          "zh-TW": "導入設計系統，跨專案重用率提升",
+          "en-US": "Introduced a design system and increased cross-project reuse"
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": "project-01",
+      "slug": "his-form-builder",
+      "title": {
+        "zh-TW": "HIS 表單引擎重構",
+        "en-US": "HIS Form Engine Revamp"
+      },
+      "summary": {
+        "zh-TW": "把病歷表單做成可配置流程，降低重複開發成本。",
+        "en-US": "Turned clinical forms into configurable flows to reduce repeated implementation."
+      },
+      "problem": {
+        "zh-TW": "每個科別都有獨立表單流程，需求變動時維護成本高。",
+        "en-US": "Each department had isolated form logic, making change requests expensive."
+      },
+      "solution": {
+        "zh-TW": "以 JSON schema + 元件映射重建流程，支援欄位規則與權限。",
+        "en-US": "Rebuilt flows with JSON schema + component mapping, including rules and permissions."
+      },
+      "impact": [
+        {
+          "zh-TW": "平均需求交付時間從 8 天降到 5 天",
+          "en-US": "Average delivery time dropped from 8 days to 5 days"
+        },
+        {
+          "zh-TW": "降低重複程式碼，提升可維護性",
+          "en-US": "Reduced duplicated code and improved maintainability"
+        }
+      ],
+      "tech": ["Vue 3", "Quasar", "REST API", "JSON Schema", "RBAC"],
+      "domainTags": ["HIS", "Workflow", "Form"],
+      "versions": ["frontend", "medical", "global"],
+      "featured": true,
+      "updatedAt": "2026-01-31",
+      "activity": {
+        "commits": 128,
+        "last30Days": 22
+      },
+      "links": {
+        "github": "https://github.com/example/his-form-builder",
+        "demo": "https://demo.example.com/his-form-builder"
+      },
+      "shots": [
+        {
+          "name": "Designer",
+          "url": "/vite.svg"
+        },
+        {
+          "name": "Permission Matrix",
+          "url": "/vite.svg"
+        }
+      ]
+    },
+    {
+      "id": "project-02",
+      "slug": "project-command-center",
+      "title": {
+        "zh-TW": "專案監控中台",
+        "en-US": "Project Command Center"
+      },
+      "summary": {
+        "zh-TW": "整合專案狀態、風險與版本紀錄，讓跨部門同步更清晰。",
+        "en-US": "Unified project status, risks, and release notes for clear cross-team alignment."
+      },
+      "problem": {
+        "zh-TW": "進度資訊分散在多個系統，主管難以即時掌握。",
+        "en-US": "Progress data was spread across multiple tools with low real-time visibility."
+      },
+      "solution": {
+        "zh-TW": "建立 API 聚合層與可篩選 dashboard，支持角色化檢視。",
+        "en-US": "Built an API aggregation layer and role-based filterable dashboards."
+      },
+      "impact": [
+        {
+          "zh-TW": "每週狀態會議準備時間縮短 40%",
+          "en-US": "Cut weekly status prep time by 40%"
+        }
+      ],
+      "tech": ["Vue 3", "Vite", "Chart", "Axios"],
+      "domainTags": ["Dashboard", "Management"],
+      "versions": ["frontend", "global"],
+      "featured": true,
+      "updatedAt": "2025-12-14",
+      "activity": {
+        "commits": 96,
+        "last30Days": 11
+      },
+      "links": {
+        "github": "https://github.com/example/project-command-center",
+        "demo": "https://demo.example.com/project-command-center"
+      },
+      "shots": [
+        {
+          "name": "Metrics",
+          "url": "/vite.svg"
+        }
+      ]
+    },
+    {
+      "id": "project-03",
+      "slug": "clinic-intake-flow",
+      "title": {
+        "zh-TW": "門診報到流程優化",
+        "en-US": "Clinic Intake Flow Optimization"
+      },
+      "summary": {
+        "zh-TW": "重整門診報到流程與狀態邏輯，降低櫃檯溝通成本。",
+        "en-US": "Refactored intake state transitions to reduce front-desk coordination overhead."
+      },
+      "problem": {
+        "zh-TW": "病患狀態切換繁瑣，容易出現資料不同步。",
+        "en-US": "Patient status transitions were brittle and often became inconsistent."
+      },
+      "solution": {
+        "zh-TW": "建立狀態機模型並以可視化時間線呈現處理進度。",
+        "en-US": "Built a state-machine model and visual timeline for processing stages."
+      },
+      "impact": [
+        {
+          "zh-TW": "櫃檯回報錯誤率下降 28%",
+          "en-US": "Reduced front-desk reporting errors by 28%"
+        }
+      ],
+      "tech": ["Vue 3", "State Machine", "REST API"],
+      "domainTags": ["HIS", "Patient Flow"],
+      "versions": ["frontend", "medical"],
+      "featured": false,
+      "updatedAt": "2025-10-05",
+      "activity": {
+        "commits": 72,
+        "last30Days": 4
+      },
+      "links": {
+        "github": "https://github.com/example/clinic-intake-flow",
+        "demo": "https://demo.example.com/clinic-intake-flow"
+      },
+      "shots": [
+        {
+          "name": "Timeline",
+          "url": "/vite.svg"
+        }
+      ]
+    },
+    {
+      "id": "project-04",
+      "slug": "multilingual-resume-cms",
+      "title": {
+        "zh-TW": "多語系履歷 CMS",
+        "en-US": "Multilingual Resume CMS"
+      },
+      "summary": {
+        "zh-TW": "以 JSON + localStorage 模擬後台，支援多版本履歷內容管理。",
+        "en-US": "Mocked an admin backend with JSON + localStorage for multilingual resume version management."
+      },
+      "problem": {
+        "zh-TW": "一般履歷無法快速切換職務版本與語言。",
+        "en-US": "A static resume cannot quickly switch roles, versions, or languages."
+      },
+      "solution": {
+        "zh-TW": "設計前台 + 後台流程，加入登入、編輯、排序與列印。",
+        "en-US": "Designed public and admin flows with auth, editing, sorting, and print support."
+      },
+      "impact": [
+        {
+          "zh-TW": "面試展示可直接切換情境，提升溝通效率",
+          "en-US": "Scenario switching during interviews made communication faster"
+        }
+      ],
+      "tech": ["Vue 3", "Vue Router", "LocalStorage", "i18n"],
+      "domainTags": ["Portfolio", "CMS"],
+      "versions": ["frontend", "global"],
+      "featured": true,
+      "updatedAt": "2026-02-12",
+      "activity": {
+        "commits": 44,
+        "last30Days": 18
+      },
+      "links": {
+        "github": "https://github.com/example/multilingual-resume-cms",
+        "demo": "https://demo.example.com/multilingual-resume-cms"
+      },
+      "shots": [
+        {
+          "name": "Admin",
+          "url": "/vite.svg"
+        }
+      ]
+    }
+  ],
+  "ui": {
+    "common": {
+      "present": {
+        "zh-TW": "目前",
+        "en-US": "Present"
+      }
+    },
+    "app": {
+      "loading": {
+        "zh-TW": "履歷系統載入中...",
+        "en-US": "Loading portfolio system..."
+      }
+    },
+    "header": {
+      "brandFallback": {
+        "zh-TW": "履歷作品集",
+        "en-US": "Portfolio Resume"
+      },
+      "nav": {
+        "home": {
+          "zh-TW": "首頁",
+          "en-US": "Home"
+        },
+        "projects": {
+          "zh-TW": "專案",
+          "en-US": "Projects"
+        },
+        "timeline": {
+          "zh-TW": "經歷",
+          "en-US": "Timeline"
+        },
+        "admin": {
+          "zh-TW": "履歷 CMS",
+          "en-US": "Resume CMS"
+        }
+      },
+      "locale": {
+        "zhTw": {
+          "zh-TW": "中文",
+          "en-US": "中文"
+        },
+        "enUs": {
+          "zh-TW": "EN",
+          "en-US": "EN"
+        }
+      },
+      "theme": {
+        "dark": {
+          "zh-TW": "夜間模式",
+          "en-US": "Dark"
+        },
+        "light": {
+          "zh-TW": "日間模式",
+          "en-US": "Light"
+        }
+      },
+      "print": {
+        "zh-TW": "PDF",
+        "en-US": "PDF"
+      }
+    },
+    "home": {
+      "exploreProjects": {
+        "zh-TW": "查看專案",
+        "en-US": "Explore Projects"
+      },
+      "contact": {
+        "zh-TW": "聯絡我",
+        "en-US": "Contact"
+      },
+      "skillsTitle": {
+        "zh-TW": "技能",
+        "en-US": "Skills"
+      },
+      "skillsDesc": {
+        "zh-TW": "以下是我實際使用過的技術與工具。",
+        "en-US": "These are the technologies and tools I have used in real projects."
+      },
+      "noSkills": {
+        "zh-TW": "目前尚無技能資料",
+        "en-US": "No skills available yet"
+      },
+      "featuredProjectsTitle": {
+        "zh-TW": "精選專案",
+        "en-US": "Featured Projects"
+      },
+      "featuredProjectsDesc": {
+        "zh-TW": "透過可互動的交付成果展現能力，不只是一份技術清單。",
+        "en-US": "Capability is shown through interactive delivery, not only a tech list."
+      },
+      "timelineTitle": {
+        "zh-TW": "經歷",
+        "en-US": "Timeline"
+      },
+      "seeFullTimeline": {
+        "zh-TW": "查看完整時間線",
+        "en-US": "See Full Timeline"
+      }
+    },
+    "projects": {
+      "title": {
+        "zh-TW": "專案作品列表",
+        "en-US": "Project Portfolio"
+      },
+      "description": {
+        "zh-TW": "可用關鍵字與技術標籤直接篩選，面試時可以快速切換展示重點",
+        "en-US": "Use search and tags to quickly switch what you want to showcase during interviews"
+      },
+      "searchPlaceholder": {
+        "zh-TW": "搜尋專案、技術、領域",
+        "en-US": "Search projects, stack, domain"
+      },
+      "resultCount": {
+        "zh-TW": "共 {count} 個專案",
+        "en-US": "{count} projects"
+      },
+      "emptyState": {
+        "zh-TW": "目前沒有符合條件的專案",
+        "en-US": "No projects match the current filters"
+      }
+    },
+    "timeline": {
+      "title": {
+        "zh-TW": "專案與工作經歷時間線",
+        "en-US": "Experience Timeline"
+      },
+      "description": {
+        "zh-TW": "從 SaaS 表單產品到醫療 HIS，重點是把流程抽象成可重用模組",
+        "en-US": "From SaaS forms to healthcare HIS, focused on reusable workflow modules"
+      }
+    },
+    "projectDetail": {
+      "backToProjects": {
+        "zh-TW": "回到專案列表",
+        "en-US": "Back to Projects"
+      },
+      "problem": {
+        "zh-TW": "問題",
+        "en-US": "Problem"
+      },
+      "solution": {
+        "zh-TW": "解法",
+        "en-US": "Solution"
+      },
+      "impact": {
+        "zh-TW": "成果",
+        "en-US": "Impact"
+      },
+      "techAndTags": {
+        "zh-TW": "技術與標籤",
+        "en-US": "Tech & Tags"
+      },
+      "preview": {
+        "zh-TW": "畫面預覽",
+        "en-US": "Preview"
+      },
+      "notFound": {
+        "zh-TW": "找不到專案",
+        "en-US": "Project not found"
+      },
+      "backToList": {
+        "zh-TW": "回到列表",
+        "en-US": "Back to list"
+      }
+    },
+    "projectCard": {
+      "viewDetails": {
+        "zh-TW": "查看詳情",
+        "en-US": "View Details"
+      }
+    },
+    "tagFilter": {
+      "clear": {
+        "zh-TW": "清除",
+        "en-US": "Clear"
+      }
+    },
+    "skillRadar": {
+      "ariaLabel": {
+        "zh-TW": "技能雷達圖",
+        "en-US": "Skill radar chart"
+      }
+    },
+    "admin": {
+      "title": {
+        "zh-TW": "履歷 CMS (無後端)",
+        "en-US": "Resume CMS (No Backend)"
+      },
+      "description": {
+        "zh-TW": "登入後可編輯主資料、專案與經歷，資料會儲存於 localStorage",
+        "en-US": "After login, you can edit meta, projects, and experiences; data is saved in localStorage"
+      },
+      "untitledExperience": {
+        "zh-TW": "未命名經歷",
+        "en-US": "Untitled Experience"
+      },
+      "login": {
+        "title": {
+          "zh-TW": "登入後台",
+          "en-US": "Sign In"
+        },
+        "button": {
+          "zh-TW": "登入",
+          "en-US": "Login"
+        },
+        "pinPlaceholder": {
+          "zh-TW": "PIN",
+          "en-US": "PIN"
+        },
+        "error": {
+          "zh-TW": "PIN 錯誤，請再試一次",
+          "en-US": "Incorrect PIN, try again"
+        }
+      },
+      "meta": {
+        "title": {
+          "zh-TW": "個人主資料",
+          "en-US": "Profile Meta"
+        },
+        "save": {
+          "zh-TW": "儲存主資料",
+          "en-US": "Save Meta"
+        }
+      },
+      "project": {
+        "title": {
+          "zh-TW": "專案摘要編輯",
+          "en-US": "Project Summary Editor"
+        },
+        "select": {
+          "zh-TW": "選擇專案",
+          "en-US": "Select Project"
+        },
+        "tech": {
+          "zh-TW": "技術 / 套件",
+          "en-US": "Tech / Packages"
+        },
+        "techPlaceholder": {
+          "zh-TW": "輸入技術名稱後按新增",
+          "en-US": "Type a tech name and click Add"
+        },
+        "add": {
+          "zh-TW": "新增",
+          "en-US": "Add"
+        },
+        "remove": {
+          "zh-TW": "刪除",
+          "en-US": "Remove"
+        },
+        "emptyTech": {
+          "zh-TW": "目前沒有技術項目",
+          "en-US": "No tech items yet"
+        },
+        "save": {
+          "zh-TW": "儲存專案摘要",
+          "en-US": "Save Project Summary"
+        }
+      },
+      "experience": {
+        "title": {
+          "zh-TW": "經歷編輯",
+          "en-US": "Experience Editor"
+        },
+        "select": {
+          "zh-TW": "選擇經歷",
+          "en-US": "Select Experience"
+        },
+        "add": {
+          "zh-TW": "新增經歷",
+          "en-US": "Add Experience"
+        },
+        "remove": {
+          "zh-TW": "刪除目前經歷",
+          "en-US": "Remove Current Experience"
+        },
+        "company": {
+          "zh-TW": "公司 / 團隊",
+          "en-US": "Company / Team"
+        },
+        "start": {
+          "zh-TW": "開始年月",
+          "en-US": "Start (YYYY-MM)"
+        },
+        "end": {
+          "zh-TW": "結束年月",
+          "en-US": "End (YYYY-MM)"
+        },
+        "hint": {
+          "zh-TW": "每行一筆亮點，ZH 與 EN 會用行號對應。",
+          "en-US": "One highlight per line. ZH and EN lines are matched by index."
+        },
+        "save": {
+          "zh-TW": "儲存經歷",
+          "en-US": "Save Experience"
+        }
+      },
+      "fields": {
+        "jobTitleZh": {
+          "zh-TW": "Job Title (ZH)",
+          "en-US": "Job Title (ZH)"
+        },
+        "jobTitleEn": {
+          "zh-TW": "Job Title (EN)",
+          "en-US": "Job Title (EN)"
+        },
+        "summaryZh": {
+          "zh-TW": "Summary (ZH)",
+          "en-US": "Summary (ZH)"
+        },
+        "summaryEn": {
+          "zh-TW": "Summary (EN)",
+          "en-US": "Summary (EN)"
+        },
+        "roleZh": {
+          "zh-TW": "Role (ZH)",
+          "en-US": "Role (ZH)"
+        },
+        "roleEn": {
+          "zh-TW": "Role (EN)",
+          "en-US": "Role (EN)"
+        },
+        "highlightsZh": {
+          "zh-TW": "Highlights (ZH)",
+          "en-US": "Highlights (ZH)"
+        },
+        "highlightsEn": {
+          "zh-TW": "Highlights (EN)",
+          "en-US": "Highlights (EN)"
+        }
+      },
+      "actions": {
+        "title": {
+          "zh-TW": "系統操作",
+          "en-US": "Actions"
+        },
+        "restore": {
+          "zh-TW": "還原預設 JSON",
+          "en-US": "Restore Seed JSON"
+        },
+        "logout": {
+          "zh-TW": "登出",
+          "en-US": "Logout"
+        }
+      }
+    }
+  }
+}
