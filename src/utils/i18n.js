@@ -1,3 +1,4 @@
+// 依指定語系取值，找不到時使用備援語系或第一個可用字串。
 export function localizeText(value, locale, fallbackLocale = 'zh-TW') {
   // 筆記：如果資料本來就是純字串，就直接回傳不做轉換。
   if (typeof value === 'string') {

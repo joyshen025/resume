@@ -1,51 +1,53 @@
-<script setup>
+﻿<script setup>
 import { computed, ref } from 'vue';
 import ProjectCard from '../components/ProjectCard.vue';
-import TagFilter from '../components/TagFilter.vue';
 import { useResumeStore } from '../stores/resumeStore';
-import { localizeText } from '../utils/i18n';
 
 const store = useResumeStore();
-const keyword = ref('');
 const selectedTags = ref([]);
 
+function getProjectTags(project) {
+  const tech = Array.isArray(project.tech) ? project.tech : [];
+  const domains = Array.isArray(project.domainTags) ? project.domainTags : [];
+  return [...tech, ...domains];
+}
+
+function toggleTag(tag) {
+  if (selectedTags.value.includes(tag)) {
+    selectedTags.value = selectedTags.value.filter((item) => item !== tag);
+    return;
+  }
+
+  selectedTags.value.push(tag);
+}
+
+function clearTags() {
+  selectedTags.value = [];
+}
+
 const allTags = computed(() => {
-  // 這裡把 tech + domainTag 合併成可篩選清單。
-  const tags = new Set();
+  const tagSet = new Set();
 
   for (const project of store.visibleProjects.value) {
-    for (const tag of project.tech ?? []) {
-      tags.add(tag);
-    }
-
-    for (const tag of project.domainTags ?? []) {
-      tags.add(tag);
+    for (const tag of getProjectTags(project)) {
+      tagSet.add(tag);
     }
   }
 
-  return [...tags].sort();
+  return [...tagSet].sort();
 });
 
 const filteredProjects = computed(() => {
-  const query = keyword.value.trim().toLowerCase();
+  const matches = store.visibleProjects.value.filter((project) => {
+    if (selectedTags.value.length === 0) {
+      return true;
+    }
 
-  // 篩選邏輯：先過版本，再做關鍵字 + tag AND 條件。
-  return store.visibleProjects.value
-    .filter((project) => {
-      const title = localizeText(project.title, store.state.locale).toLowerCase();
-      const summary = localizeText(project.summary, store.state.locale).toLowerCase();
-      const tags = [...(project.tech ?? []), ...(project.domainTags ?? [])];
-      const tagMatches =
-        selectedTags.value.length === 0 || selectedTags.value.every((tag) => tags.includes(tag));
-      const queryMatches =
-        query.length === 0 ||
-        title.includes(query) ||
-        summary.includes(query) ||
-        tags.some((tag) => tag.toLowerCase().includes(query));
+    const projectTags = getProjectTags(project);
+    return selectedTags.value.some((tag) => projectTags.includes(tag));
+  });
 
-      return tagMatches && queryMatches;
-    })
-    .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
+  return [...matches].sort((a, b) => b.updatedAt.localeCompare(a.updatedAt));
 });
 
 const resultCountText = computed(() =>
@@ -61,25 +63,28 @@ const resultCountText = computed(() =>
     </header>
 
     <div class="controls">
-      <input
-        v-model="keyword"
-        type="search"
-        class="text-input"
-        :placeholder="store.ui('projects.searchPlaceholder')"
-      />
+      <div class="filters">
+        <button class="btn btn-danger" type="button" @click="clearTags">
+          {{ store.ui('tagFilter.clear') }}
+        </button>
 
-      <TagFilter v-model="selectedTags" :tags="allTags" />
+        <button
+          v-for="tag in allTags"
+          :key="tag"
+          class="btn"
+          type="button"
+          :class="{ 'is-active': selectedTags.includes(tag) }"
+          @click="toggleTag(tag)"
+        >
+          {{ tag }}
+        </button>
+      </div>
     </div>
 
     <p class="result-count">{{ resultCountText }}</p>
 
     <div v-if="filteredProjects.length > 0" class="project-grid">
-      <ProjectCard
-        v-for="project in filteredProjects"
-        :key="project.id"
-        :project="project"
-        :locale="store.state.locale"
-      />
+      <ProjectCard v-for="project in filteredProjects" :key="project.id" :project="project" />
     </div>
 
     <p v-else class="empty-state">{{ store.ui('projects.emptyState') }}</p>
@@ -96,6 +101,22 @@ const resultCountText = computed(() =>
 .controls {
   display: grid;
   gap: 0.7rem;
+}
+
+.filters {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filters .btn {
+  padding: 0.42rem 0.72rem;
+  font-size: 0.82rem;
+}
+
+.filters .btn.is-active {
+  border-color: color-mix(in srgb, var(--accent) 50%, var(--border));
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
 }
 
 .result-count {

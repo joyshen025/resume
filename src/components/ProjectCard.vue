@@ -1,7 +1,5 @@
 <script setup>
-import { computed } from 'vue';
 import { RouterLink } from 'vue-router';
-import { localizeText } from '../utils/i18n';
 import { useResumeStore } from '../stores/resumeStore';
 
 const store = useResumeStore();
@@ -11,33 +9,29 @@ const props = defineProps({
     type: Object,
     required: true,
   },
-  locale: {
-    type: String,
-    default: 'zh-TW',
-  },
 });
-
-const projectTitle = computed(() => localizeText(props.project.title, props.locale));
-const projectSummary = computed(() => localizeText(props.project.summary, props.locale));
-const detailCtaLabel = computed(() => store.ui('projectCard.viewDetails'));
 </script>
 
 <template>
   <article class="card project-card">
     <header>
-      <h3>{{ projectTitle }}</h3>
-      <p>{{ projectSummary }}</p>
+      <h3>{{ store.t(props.project.title) }}</h3>
+      <p>{{ store.t(props.project.summary) }}</p>
     </header>
 
     <div class="tag-list">
-      <span v-for="tag in project.tech ?? []" :key="`${project.slug}-${tag}`" class="pill">
+      <span
+        v-for="tag in props.project.tech ?? []"
+        :key="`${props.project.slug}-${tag}`"
+        class="pill"
+      >
         {{ tag }}
       </span>
     </div>
 
     <footer>
-      <RouterLink :to="`/projects/${project.slug}`" class="btn btn-primary">
-        {{ detailCtaLabel }}
+      <RouterLink :to="`/projects/${props.project.slug}`" class="btn btn-primary">
+        {{ store.ui('projectCard.viewDetails') }}
       </RouterLink>
     </footer>
   </article>

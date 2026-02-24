@@ -1,9 +1,17 @@
 <script setup>
+import { computed } from 'vue';
 import { useResumeStore } from '../stores/resumeStore';
 import { formatPeriod } from '../utils/date';
 
 const store = useResumeStore();
+const timelineItems = computed(() =>
+  store.experienceTimeline.value.map((item) => ({
+    ...item,
+    highlights: Array.isArray(item.highlights) ? item.highlights : [],
+  }))
+);
 
+// 將單筆經歷的開始與結束時間轉成可顯示文字。
 function formatDateRange(item) {
   const present = store.ui('common.present');
   return formatPeriod(item.start, item.end, store.state.locale, present);
@@ -19,11 +27,7 @@ function formatDateRange(item) {
 
     <!-- 每一筆經歷都走同一個卡片結構，方便之後擴展更多欄位。 -->
     <div class="timeline-list">
-      <article
-        v-for="item in store.experienceTimeline.value"
-        :key="item.id"
-        class="card timeline-item"
-      >
+      <article v-for="item in timelineItems" :key="item.id" class="card timeline-item">
         <div class="timeline-item__line" />
         <div class="timeline-item__body">
           <p class="timeline-item__period">{{ formatDateRange(item) }}</p>

@@ -9,21 +9,23 @@ import { formatPeriod } from '../utils/date';
 const store = useResumeStore();
 
 const profile = computed(() => store.state.data?.meta ?? null);
-const sectionSet = computed(() => new Set(store.state.data?.sectionOrder ?? []));
+const sectionOrder = computed(() => store.state.data?.sectionOrder ?? []);
 const usedSkills = computed(() => {
   const skills = store.state.data?.skills ?? [];
-  const uniqueNames = new Set(
-    skills
-      .map((skill) => skill?.name)
-      .filter((name) => typeof name === 'string' && name.trim().length > 0)
-  );
-
-  return [...uniqueNames];
+  const names = skills
+    .map((skill) => skill?.name?.trim?.() ?? '')
+    .filter((name) => name.length > 0);
+  return [...new Set(names)];
 });
 const featuredProjects = computed(() => store.featuredProjects.value.slice(0, 3));
 const timelinePreview = computed(() => store.experienceTimeline.value.slice(0, 3));
 const introLines = computed(() => profile.value?.introLines?.[store.state.locale] ?? []);
 
+function hasSection(sectionId) {
+  return sectionOrder.value.includes(sectionId);
+}
+
+// 依目前語系格式化經歷的起訖期間文字。
 function localizePeriod(start, end) {
   const present = store.ui('common.present');
   return formatPeriod(start, end, store.state.locale, present);
@@ -32,7 +34,7 @@ function localizePeriod(start, end) {
 
 <template>
   <div class="home-grid">
-    <section v-if="sectionSet.has('hero') && profile" class="panel hero">
+    <section v-if="hasSection('hero') && profile" class="panel hero">
       <div class="hero__content">
         <p class="pill">{{ profile.location }}</p>
         <h1>{{ profile.ownerName }}</h1>
@@ -50,7 +52,7 @@ function localizePeriod(start, end) {
       <TerminalIntro :lines="introLines" />
     </section>
 
-    <section v-if="sectionSet.has('skills')" class="panel section">
+    <section v-if="hasSection('skills')" class="panel section">
       <header class="section-head">
         <h2 class="section-title">{{ store.ui('home.skillsTitle') }}</h2>
         <p class="section-desc">{{ store.ui('home.skillsDesc') }}</p>
@@ -65,23 +67,18 @@ function localizePeriod(start, end) {
       <p v-else class="empty-skill">{{ store.ui('home.noSkills') }}</p>
     </section>
 
-    <section v-if="sectionSet.has('featuredProjects')" class="section">
+    <section v-if="hasSection('featuredProjects')" class="section">
       <header class="section-head">
         <h2 class="section-title">{{ store.ui('home.featuredProjectsTitle') }}</h2>
         <p class="section-desc">{{ store.ui('home.featuredProjectsDesc') }}</p>
       </header>
 
       <div class="project-grid">
-        <ProjectCard
-          v-for="project in featuredProjects"
-          :key="project.id"
-          :project="project"
-          :locale="store.state.locale"
-        />
+        <ProjectCard v-for="project in featuredProjects" :key="project.id" :project="project" />
       </div>
     </section>
 
-    <section v-if="sectionSet.has('timelinePreview')" class="panel section">
+    <section v-if="hasSection('timelinePreview')" class="panel section">
       <header class="section-head">
         <h2 class="section-title">{{ store.ui('home.timelineTitle') }}</h2>
       </header>
@@ -157,7 +154,7 @@ function localizePeriod(start, end) {
 .skill-chip {
   border-color: color-mix(in srgb, var(--accent) 32%, var(--border));
   background: color-mix(in srgb, var(--accent) 12%, transparent);
-  margin:0 0.5px ;
+  margin: 0 0.5px;
 }
 
 .empty-skill {

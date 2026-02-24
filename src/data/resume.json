@@ -6,7 +6,10 @@
     "github": "https://github.com/example/joy-shen",
     "website": "https://joyShen.dev",
     "defaultLocale": "zh-TW",
-    "supportedLocales": ["zh-TW", "en-US"],
+    "supportedLocales": [
+      "zh-TW",
+      "en-US"
+    ],
     "jobTitle": {
       "zh-TW": "前端工程師 / HIS 流程系統開發",
       "en-US": "Frontend Engineer / HIS Workflow Specialist"
@@ -16,7 +19,11 @@
       "en-US": "This portfolio treats a resume as a product and demonstrates UI, flow design, data modeling, access control, and maintainability."
     },
     "introLines": {
-      "zh-TW": ["npm run dev", "載入工程師作品履歷系統...", "展示前端能力 + 實務流程能力"],
+      "zh-TW": [
+        "npm run dev",
+        "載入工程師作品履歷系統...",
+        "展示前端能力 + 實務流程能力"
+      ],
       "en-US": [
         "npm run dev",
         "Booting engineer portfolio system...",
@@ -84,48 +91,11 @@
       }
     }
   ],
-  "sectionOrder": ["hero", "skills", "featuredProjects", "timelinePreview"],
-  "skillRadar": [
-    {
-      "id": "frontend",
-      "label": {
-        "zh-TW": "前端架構",
-        "en-US": "Frontend Architecture"
-      },
-      "score": 90
-    },
-    {
-      "id": "domain",
-      "label": {
-        "zh-TW": "醫療領域理解",
-        "en-US": "Medical Domain"
-      },
-      "score": 84
-    },
-    {
-      "id": "api",
-      "label": {
-        "zh-TW": "API 整合",
-        "en-US": "API Integration"
-      },
-      "score": 87
-    },
-    {
-      "id": "workflow",
-      "label": {
-        "zh-TW": "流程設計",
-        "en-US": "Workflow Design"
-      },
-      "score": 88
-    },
-    {
-      "id": "quality",
-      "label": {
-        "zh-TW": "品質與維護",
-        "en-US": "Quality & Maintainability"
-      },
-      "score": 82
-    }
+  "sectionOrder": [
+    "hero",
+    "skills",
+    "featuredProjects",
+    "timelinePreview"
   ],
   "skills": [
     {
@@ -250,9 +220,23 @@
           "en-US": "Reduced duplicated code and improved maintainability"
         }
       ],
-      "tech": ["Vue 3", "Quasar", "REST API", "JSON Schema", "RBAC"],
-      "domainTags": ["HIS", "Workflow", "Form"],
-      "versions": ["frontend", "medical", "global"],
+      "tech": [
+        "Vue 3",
+        "Quasar",
+        "REST API",
+        "JSON Schema",
+        "RBAC"
+      ],
+      "domainTags": [
+        "HIS",
+        "Workflow",
+        "Form"
+      ],
+      "versions": [
+        "frontend",
+        "medical",
+        "global"
+      ],
       "featured": true,
       "updatedAt": "2026-01-31",
       "activity": {
@@ -299,9 +283,20 @@
           "en-US": "Cut weekly status prep time by 40%"
         }
       ],
-      "tech": ["Vue 3", "Vite", "Chart", "Axios"],
-      "domainTags": ["Dashboard", "Management"],
-      "versions": ["frontend", "global"],
+      "tech": [
+        "Vue 3",
+        "Vite",
+        "Chart",
+        "Axios"
+      ],
+      "domainTags": [
+        "Dashboard",
+        "Management"
+      ],
+      "versions": [
+        "frontend",
+        "global"
+      ],
       "featured": true,
       "updatedAt": "2025-12-14",
       "activity": {
@@ -344,9 +339,19 @@
           "en-US": "Reduced front-desk reporting errors by 28%"
         }
       ],
-      "tech": ["Vue 3", "State Machine", "REST API"],
-      "domainTags": ["HIS", "Patient Flow"],
-      "versions": ["frontend", "medical"],
+      "tech": [
+        "Vue 3",
+        "State Machine",
+        "REST API"
+      ],
+      "domainTags": [
+        "HIS",
+        "Patient Flow"
+      ],
+      "versions": [
+        "frontend",
+        "medical"
+      ],
       "featured": false,
       "updatedAt": "2025-10-05",
       "activity": {
@@ -389,9 +394,20 @@
           "en-US": "Scenario switching during interviews made communication faster"
         }
       ],
-      "tech": ["Vue 3", "Vue Router", "LocalStorage", "i18n"],
-      "domainTags": ["Portfolio", "CMS"],
-      "versions": ["frontend", "global"],
+      "tech": [
+        "Vue 3",
+        "Vue Router",
+        "LocalStorage",
+        "i18n"
+      ],
+      "domainTags": [
+        "Portfolio",
+        "CMS"
+      ],
+      "versions": [
+        "frontend",
+        "global"
+      ],
       "featured": true,
       "updatedAt": "2026-02-12",
       "activity": {
@@ -515,8 +531,8 @@
         "en-US": "Project Portfolio"
       },
       "description": {
-        "zh-TW": "可用關鍵字與技術標籤直接篩選，面試時可以快速切換展示重點",
-        "en-US": "Use search and tags to quickly switch what you want to showcase during interviews"
+        "zh-TW": "可用技術標籤直接篩選，快速切換展示重點",
+        "en-US": "Use tags to quickly switch what you want to showcase during interviews"
       },
       "searchPlaceholder": {
         "zh-TW": "搜尋專案、技術、領域",
@@ -585,12 +601,6 @@
       "clear": {
         "zh-TW": "清除",
         "en-US": "Clear"
-      }
-    },
-    "skillRadar": {
-      "ariaLabel": {
-        "zh-TW": "技能雷達圖",
-        "en-US": "Skill radar chart"
       }
     },
     "admin": {

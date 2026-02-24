@@ -19,6 +19,7 @@ const showCursor = ref(true);
 let typeTimer = null;
 let cursorTimer = null;
 
+// 依設定速度逐字輸出每一行，模擬終端機打字效果。
 function beginTyping() {
   // 先把非字串資料過濾掉，避免不預期型別。
   const sourceLines = props.lines.filter((line) => typeof line === 'string');

@@ -2,9 +2,12 @@
 import { computed } from 'vue';
 import { RouterLink, useRoute } from 'vue-router';
 import { useResumeStore } from '../stores/resumeStore';
+import { writeJsonStorage } from '../utils/storage';
 
 const store = useResumeStore();
 const route = useRoute();
+const PREF_STORAGE_KEY = 'resume.product.pref.v1';
+const DEFAULT_LOCALES = ['zh-TW', 'en-US'];
 
 const navItems = [
   {
@@ -30,18 +33,42 @@ const localeOptions = computed(() => [
   { id: 'en-US', label: store.ui('header.locale.enUs') },
 ]);
 
-const themeLabel = computed(() => {
-  if (store.state.theme === 'dawn') {
-    return store.ui('header.theme.dark');
-  }
-
-  return store.ui('header.theme.light');
-});
+const themeLabel = computed(() =>
+  store.state.theme === 'dawn' ? store.ui('header.theme.dark') : store.ui('header.theme.light')
+);
 
 const title = computed(() =>
   store.t(store.state.data?.meta?.jobTitle ?? { 'zh-TW': '', 'en-US': '' })
 );
 
+// 儲存目前語系、主題與版本偏好設定。
+function savePreferences() {
+  writeJsonStorage(PREF_STORAGE_KEY, {
+    locale: store.state.locale,
+    theme: store.state.theme,
+    selectedVersion: store.state.selectedVersion,
+  });
+}
+
+// 切換語系並持久化偏好設定。
+function setLocale(nextLocale) {
+  const supportedLocales = store.state.data?.meta?.supportedLocales ?? DEFAULT_LOCALES;
+
+  if (!supportedLocales.includes(nextLocale)) {
+    return;
+  }
+
+  store.state.locale = nextLocale;
+  savePreferences();
+}
+
+// 在 dawn / midnight 主題間切換並儲存設定。
+function toggleTheme() {
+  store.state.theme = store.state.theme === 'dawn' ? 'midnight' : 'dawn';
+  savePreferences();
+}
+
+// 判斷當前路由是否屬於指定導覽項目。
 function isActive(targetPath) {
   if (targetPath === '/') {
     return route.path === '/';
@@ -50,6 +77,7 @@ function isActive(targetPath) {
   return route.path === targetPath || route.path.startsWith(`${targetPath}/`);
 }
 
+// 觸發瀏覽器列印目前頁面。
 function printPage() {
   window.print();
 }
@@ -79,14 +107,14 @@ function printPage() {
         <select
           class="select-input compact"
           :value="store.state.locale"
-          @change="store.setLocale($event.target.value)"
+          @change="setLocale($event.target.value)"
         >
           <option v-for="locale in localeOptions" :key="locale.id" :value="locale.id">
             {{ locale.label }}
           </option>
         </select>
 
-        <button class="btn" type="button" @click="store.toggleTheme()">
+        <button class="btn" type="button" @click="toggleTheme">
           {{ themeLabel }}
         </button>
 

@@ -1,43 +1,14 @@
 import { computed, reactive } from 'vue';
 import { fetchResumeData } from '../boots/api';
 import { localizeText } from '../utils/i18n';
+import { readJsonStorage } from '../utils/storage';
 
 const DATA_STORAGE_KEY = 'resume.product.data.v1';
 const PREF_STORAGE_KEY = 'resume.product.pref.v1';
-const AUTH_STORAGE_KEY = 'resume.product.auth.v1';
 
+// 深拷貝資料，避免直接修改原始物件參考。
 function cloneValue(value) {
   return JSON.parse(JSON.stringify(value));
-}
-
-function canUseStorage() {
-  return typeof window !== 'undefined' && typeof window.localStorage !== 'undefined';
-}
-
-function readStorage(key) {
-  if (!canUseStorage()) {
-    return null;
-  }
-
-  const rawValue = window.localStorage.getItem(key);
-
-  if (!rawValue) {
-    return null;
-  }
-
-  try {
-    return JSON.parse(rawValue);
-  } catch (error) {
-    return null;
-  }
-}
-
-function writeStorage(key, value) {
-  if (!canUseStorage()) {
-    return;
-  }
-
-  window.localStorage.setItem(key, JSON.stringify(value));
 }
 
 const state = reactive({
@@ -46,44 +17,19 @@ const state = reactive({
   locale: 'zh-TW',
   theme: 'dawn',
   selectedVersion: 'frontend',
-  token: '',
   data: null,
 });
 
 const supportedLocales = computed(() => state.data?.meta?.supportedLocales ?? ['zh-TW', 'en-US']);
-
 const visibleProjects = computed(() => state.data?.projects ?? []);
-
 const featuredProjects = computed(() =>
   visibleProjects.value.filter((project) => Boolean(project.featured))
 );
-
 const experienceTimeline = computed(() =>
   [...(state.data?.experiences ?? [])].sort((a, b) => b.start.localeCompare(a.start))
 );
 
-const isLoggedIn = computed(() => Boolean(state.token));
-
-function savePrefs() {
-  writeStorage(PREF_STORAGE_KEY, {
-    locale: state.locale,
-    theme: state.theme,
-    selectedVersion: state.selectedVersion,
-  });
-}
-
-function saveData() {
-  if (!state.data) {
-    return;
-  }
-
-  writeStorage(DATA_STORAGE_KEY, state.data);
-}
-
-function saveToken() {
-  writeStorage(AUTH_STORAGE_KEY, state.token);
-}
-
+// 確保目前選擇的履歷版本存在於可用版本清單中。
 function normalizeVersion() {
   const versions = state.data?.resumeVersions ?? [];
 
@@ -98,8 +44,9 @@ function normalizeVersion() {
   }
 }
 
+// 套用使用者偏好（語系、主題、版本）到 store 狀態。
 function hydratePreferences() {
-  const prefs = readStorage(PREF_STORAGE_KEY);
+  const prefs = readJsonStorage(PREF_STORAGE_KEY);
   const defaultLocale = state.data?.meta?.defaultLocale ?? 'zh-TW';
   const localeCandidates = new Set(supportedLocales.value);
 
@@ -120,6 +67,7 @@ function hydratePreferences() {
   normalizeVersion();
 }
 
+// 初始化履歷資料與偏好設定，只會執行一次。
 async function initialize() {
   if (state.initialized) {
     return;
@@ -128,64 +76,22 @@ async function initialize() {
   state.loading = true;
 
   const seed = await fetchResumeData();
-  const draft = readStorage(DATA_STORAGE_KEY);
+  const draft = readJsonStorage(DATA_STORAGE_KEY);
   const preferSeedData = import.meta.env.DEV;
 
-  // In local development, always use seed JSON so file edits are reflected immediately.
-  state.data = cloneValue(preferSeedData ? seed : draft ?? seed);
-
+  state.data = cloneValue(preferSeedData ? seed : (draft ?? seed));
   hydratePreferences();
-
-  const token = readStorage(AUTH_STORAGE_KEY);
-  state.token = typeof token === 'string' ? token : '';
 
   state.initialized = true;
   state.loading = false;
 }
 
-function setLocale(nextLocale) {
-  if (!supportedLocales.value.includes(nextLocale)) {
-    return;
-  }
-
-  state.locale = nextLocale;
-  savePrefs();
-}
-
-function toggleTheme() {
-  state.theme = state.theme === 'dawn' ? 'midnight' : 'dawn';
-  savePrefs();
-}
-
-function setVersion(versionId) {
-  state.selectedVersion = versionId;
-  normalizeVersion();
-  savePrefs();
-}
-
-function login(pin) {
-  if (!state.data?.security?.loginPin) {
-    return false;
-  }
-
-  if (pin !== state.data.security.loginPin) {
-    return false;
-  }
-
-  state.token = `session-${Date.now()}`;
-  saveToken();
-  return true;
-}
-
-function logout() {
-  state.token = '';
-  saveToken();
-}
-
+// 依目前語系與預設語系回傳對應文字。
 function t(messageMap) {
   return localizeText(messageMap, state.locale, state.data?.meta?.defaultLocale ?? 'zh-TW');
 }
 
+// 透過 a.b.c 路徑讀取巢狀物件欄位值。
 function getNestedValue(source, path) {
   if (!source || typeof source !== 'object' || typeof path !== 'string') {
     return undefined;
@@ -200,6 +106,7 @@ function getNestedValue(source, path) {
   }, source);
 }
 
+// 將模板中的 {key} 佔位符替換成 params 對應值。
 function interpolateText(template, params) {
   if (typeof template !== 'string') {
     return '';
@@ -219,341 +126,11 @@ function interpolateText(template, params) {
   });
 }
 
+// 讀取 UI 文案後，進行語系與參數插值處理。
 function ui(path, params) {
   const messageMap = getNestedValue(state.data?.ui, path);
   const localizedText = t(messageMap);
   return interpolateText(localizedText, params);
-}
-
-function updateMetaLocaleField(fieldName, locale, nextValue) {
-  if (!state.data?.meta?.[fieldName] || typeof state.data.meta[fieldName] !== 'object') {
-    return;
-  }
-
-  state.data.meta[fieldName][locale] = nextValue;
-  saveData();
-}
-
-function updateMetaField(fieldName, nextValue) {
-  if (!state.data?.meta || typeof fieldName !== 'string') {
-    return;
-  }
-
-  if (typeof state.data.meta[fieldName] !== 'string') {
-    return;
-  }
-
-  state.data.meta[fieldName] = typeof nextValue === 'string' ? nextValue : '';
-  saveData();
-}
-
-function updateSkillsFromNames(nextNames) {
-  if (!state.data || !Array.isArray(nextNames)) {
-    return;
-  }
-
-  const currentSkills = Array.isArray(state.data.skills) ? state.data.skills : [];
-  const normalizedNames = nextNames
-    .map((name) => (typeof name === 'string' ? name.trim() : ''))
-    .filter((name) => name.length > 0);
-
-  state.data.skills = normalizedNames.map((name, index) => {
-    const current = currentSkills[index] ?? {};
-    const fallbackId = `skill-${String(index + 1).padStart(2, '0')}`;
-
-    return {
-      id: typeof current.id === 'string' && current.id.trim().length > 0 ? current.id : fallbackId,
-      name,
-      category:
-        typeof current.category === 'string' && current.category.trim().length > 0
-          ? current.category
-          : 'general',
-    };
-  });
-
-  saveData();
-}
-
-function addSkill(skillName, category = 'general') {
-  const normalizedName = typeof skillName === 'string' ? skillName.trim() : '';
-
-  if (!state.data || normalizedName.length === 0) {
-    return;
-  }
-
-  if (!Array.isArray(state.data.skills)) {
-    state.data.skills = [];
-  }
-
-  if (state.data.skills.some((item) => item?.name === normalizedName)) {
-    return;
-  }
-
-  const latestIndex = state.data.skills.reduce((max, item) => {
-    const match = /^skill-(\d+)$/.exec(item?.id ?? '');
-    const value = match ? Number(match[1]) : 0;
-    return Math.max(max, value);
-  }, 0);
-
-  state.data.skills.push({
-    id: `skill-${String(latestIndex + 1).padStart(2, '0')}`,
-    name: normalizedName,
-    category: typeof category === 'string' && category.trim().length > 0 ? category.trim() : 'general',
-  });
-
-  saveData();
-}
-
-function removeSkill(skillName) {
-  const normalizedName = typeof skillName === 'string' ? skillName.trim() : '';
-
-  if (!state.data?.skills || normalizedName.length === 0) {
-    return;
-  }
-
-  state.data.skills = state.data.skills.filter((item) => item?.name !== normalizedName);
-  saveData();
-}
-
-function updateSectionOrder(nextOrder) {
-  if (!state.data) {
-    return;
-  }
-
-  state.data.sectionOrder = [...nextOrder];
-  saveData();
-}
-
-function moveSection(sectionId, direction) {
-  if (!state.data?.sectionOrder) {
-    return;
-  }
-
-  const currentOrder = [...state.data.sectionOrder];
-  const index = currentOrder.indexOf(sectionId);
-
-  if (index < 0) {
-    return;
-  }
-
-  const targetIndex = direction === 'up' ? index - 1 : index + 1;
-
-  if (targetIndex < 0 || targetIndex >= currentOrder.length) {
-    return;
-  }
-
-  [currentOrder[index], currentOrder[targetIndex]] = [
-    currentOrder[targetIndex],
-    currentOrder[index],
-  ];
-  updateSectionOrder(currentOrder);
-}
-
-function getProjectBySlug(slug) {
-  if (!state.data?.projects) {
-    return null;
-  }
-
-  return state.data.projects.find((item) => item.slug === slug) ?? null;
-}
-
-function updateProjectSummary(slug, locale, nextSummary) {
-  const project = getProjectBySlug(slug);
-
-  if (!project?.summary || typeof project.summary !== 'object') {
-    return;
-  }
-
-  project.summary[locale] = nextSummary;
-  saveData();
-}
-
-function updateProjectContributions(slug, nextContributions) {
-  const project = getProjectBySlug(slug);
-
-  if (!project || !Array.isArray(nextContributions)) {
-    return;
-  }
-
-  project.contributions = nextContributions
-    .map((item) => {
-      const zh = typeof item?.['zh-TW'] === 'string' ? item['zh-TW'].trim() : '';
-      const en = typeof item?.['en-US'] === 'string' ? item['en-US'].trim() : '';
-
-      return {
-        'zh-TW': zh,
-        'en-US': en,
-      };
-    })
-    .filter((item) => item['zh-TW'].length > 0 || item['en-US'].length > 0);
-
-  saveData();
-}
-
-function getExperienceById(experienceId) {
-  if (!state.data?.experiences) {
-    return null;
-  }
-
-  return state.data.experiences.find((item) => item.id === experienceId) ?? null;
-}
-
-function updateExperienceBase(experienceId, payload) {
-  const experience = getExperienceById(experienceId);
-
-  if (!experience || !payload || typeof payload !== 'object') {
-    return;
-  }
-
-  if (typeof payload.company === 'string') {
-    experience.company = payload.company.trim();
-  }
-
-  if (typeof payload.start === 'string' && payload.start.trim().length > 0) {
-    experience.start = payload.start.trim();
-  }
-
-  if (typeof payload.end === 'string') {
-    const normalizedEnd = payload.end.trim();
-    experience.end = normalizedEnd.length > 0 ? normalizedEnd : null;
-  } else if (payload.end === null) {
-    experience.end = null;
-  }
-
-  saveData();
-}
-
-function updateExperienceLocaleField(experienceId, fieldName, locale, nextValue) {
-  const experience = getExperienceById(experienceId);
-
-  if (!experience) {
-    return;
-  }
-
-  if (!experience[fieldName] || typeof experience[fieldName] !== 'object') {
-    experience[fieldName] = { 'zh-TW': '', 'en-US': '' };
-  }
-
-  experience[fieldName][locale] = typeof nextValue === 'string' ? nextValue : '';
-  saveData();
-}
-
-function updateExperienceHighlights(experienceId, nextHighlights) {
-  const experience = getExperienceById(experienceId);
-
-  if (!experience || !Array.isArray(nextHighlights)) {
-    return;
-  }
-
-  experience.highlights = nextHighlights
-    .map((item) => {
-      const zh = typeof item?.['zh-TW'] === 'string' ? item['zh-TW'].trim() : '';
-      const en = typeof item?.['en-US'] === 'string' ? item['en-US'].trim() : '';
-
-      return {
-        'zh-TW': zh,
-        'en-US': en,
-      };
-    })
-    .filter((item) => item['zh-TW'].length > 0 || item['en-US'].length > 0);
-
-  saveData();
-}
-
-function addExperience() {
-  if (!state.data) {
-    return null;
-  }
-
-  if (!Array.isArray(state.data.experiences)) {
-    state.data.experiences = [];
-  }
-
-  const latestIndex = state.data.experiences.reduce((max, item) => {
-    const match = /^exp-(\d+)$/.exec(item?.id ?? '');
-    const value = match ? Number(match[1]) : 0;
-    return Math.max(max, value);
-  }, 0);
-
-  const nextId = `exp-${String(latestIndex + 1).padStart(2, '0')}`;
-  const currentMonth = new Date().toISOString().slice(0, 7);
-
-  state.data.experiences.unshift({
-    id: nextId,
-    start: currentMonth,
-    end: null,
-    company: '',
-    role: {
-      'zh-TW': '',
-      'en-US': '',
-    },
-    summary: {
-      'zh-TW': '',
-      'en-US': '',
-    },
-    highlights: [],
-  });
-
-  saveData();
-  return nextId;
-}
-
-function removeExperience(experienceId) {
-  if (!state.data?.experiences) {
-    return;
-  }
-
-  state.data.experiences = state.data.experiences.filter((item) => item.id !== experienceId);
-  saveData();
-}
-
-function addProjectTech(slug, techName) {
-  const normalizedTech = techName?.trim();
-
-  if (!normalizedTech) {
-    return;
-  }
-
-  const project = getProjectBySlug(slug);
-
-  if (!project) {
-    return;
-  }
-
-  if (!Array.isArray(project.tech)) {
-    project.tech = [];
-  }
-
-  if (project.tech.includes(normalizedTech)) {
-    return;
-  }
-
-  project.tech.push(normalizedTech);
-  saveData();
-}
-
-function removeProjectTech(slug, techName) {
-  const normalizedTech = techName?.trim();
-
-  if (!normalizedTech) {
-    return;
-  }
-
-  const project = getProjectBySlug(slug);
-
-  if (!project || !Array.isArray(project.tech)) {
-    return;
-  }
-
-  project.tech = project.tech.filter((item) => item !== normalizedTech);
-  saveData();
-}
-
-async function resetData() {
-  const seed = await fetchResumeData();
-  state.data = cloneValue(seed);
-  normalizeVersion();
-  saveData();
 }
 
 const store = {
@@ -562,33 +139,12 @@ const store = {
   visibleProjects,
   featuredProjects,
   experienceTimeline,
-  isLoggedIn,
   initialize,
-  setLocale,
-  setVersion,
-  toggleTheme,
-  login,
-  logout,
   t,
   ui,
-  updateMetaField,
-  updateMetaLocaleField,
-  updateSkillsFromNames,
-  addSkill,
-  removeSkill,
-  moveSection,
-  updateProjectSummary,
-  updateProjectContributions,
-  updateExperienceBase,
-  updateExperienceLocaleField,
-  updateExperienceHighlights,
-  addExperience,
-  removeExperience,
-  addProjectTech,
-  removeProjectTech,
-  resetData,
 };
 
+// 回傳全域單例 store，供元件共用同一份狀態。
 export function useResumeStore() {
   return store;
 }

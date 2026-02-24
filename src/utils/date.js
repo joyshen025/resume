@@ -1,3 +1,4 @@
+// 將 YYYY-MM 字串解析為日期物件（預設為該月 1 日）。
 function parseYearMonth(value) {
   if (!value) {
     return null;
@@ -15,6 +16,7 @@ function parseYearMonth(value) {
   return new Date(year, month - 1, 1);
 }
 
+// 依語系格式化月份文字（例如 Jan 2026）。
 function formatMonth(value, locale) {
   const dateValue = parseYearMonth(value);
 
@@ -29,6 +31,7 @@ function formatMonth(value, locale) {
   }).format(dateValue);
 }
 
+// 組合起訖月份字串，供時間軸等區塊顯示。
 export function formatPeriod(start, end, locale, presentLabel) {
   // 這個函式統一處理 timeline 的日期區間顯示。
   const startLabel = formatMonth(start, locale);

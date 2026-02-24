@@ -10,16 +10,6 @@ const project = computed(() => {
   const allProjects = store.state.data?.projects ?? [];
   return allProjects.find((item) => item.slug === route.params.slug);
 });
-const isEnglishLocale = computed(() => store.state.locale === 'en-US');
-const whatIDidTitle = computed(() =>
-  isEnglishLocale.value ? 'What I Did' : '\u6211\u5728\u9019\u500b\u5c08\u6848\u505a\u4e86\u4ec0\u9ebc'
-);
-const techTitle = computed(() =>
-  isEnglishLocale.value ? 'Technologies Used' : '\u4f7f\u7528\u6280\u8853'
-);
-const emptyTechText = computed(() =>
-  isEnglishLocale.value ? 'No tech listed yet' : '\u5c1a\u672a\u586b\u5beb\u6280\u8853'
-);
 const projectContributions = computed(() => {
   if (!project.value) {
     return [];
@@ -31,8 +21,11 @@ const projectContributions = computed(() => {
 
   return project.value.solution ? [project.value.solution] : [];
 });
-const projectImpact = computed(() => project.value?.impact ?? []);
 const projectTech = computed(() => project.value?.tech ?? []);
+
+function localeText(zhText, enText) {
+  return store.state.locale === 'en-US' ? enText : zhText;
+}
 </script>
 
 <template>
@@ -50,7 +43,7 @@ const projectTech = computed(() => project.value?.tech ?? []);
     </header>
 
     <section v-if="projectContributions.length > 0" class="panel block">
-      <h2 class="section-title">{{ whatIDidTitle }}</h2>
+      <h2 class="section-title">{{ localeText('我在這個專案做了什麼', 'What I Did') }}</h2>
       <ul class="impact-list">
         <li v-for="(entry, index) in projectContributions" :key="`contribution-${index}`">
           {{ store.t(entry) }}
@@ -59,13 +52,15 @@ const projectTech = computed(() => project.value?.tech ?? []);
     </section>
 
     <section class="panel block">
-      <h2 class="section-title">{{ techTitle }}</h2>
+      <h2 class="section-title">{{ localeText('使用技術', 'Technologies Used') }}</h2>
       <div class="tag-list">
         <span v-for="tag in projectTech" :key="`tech-${tag}`" class="pill">
           {{ tag }}
         </span>
       </div>
-      <p v-if="projectTech.length === 0" class="empty-text">{{ emptyTechText }}</p>
+      <p v-if="projectTech.length === 0" class="empty-text">
+        {{ localeText('尚未填寫技術', 'No tech listed yet') }}
+      </p>
     </section>
 
     <section class="panel block">
