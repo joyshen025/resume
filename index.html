@@ -4,6 +4,22 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/resume/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      // GitHub Pages SPA fallback: restore original path redirected by 404.html
+      (function (location) {
+        if (!location.search || location.search.length < 2 || location.search[1] !== '/') {
+          return;
+        }
+
+        const decoded = location.search
+          .slice(1)
+          .split('&')
+          .map((segment) => segment.replace(/~and~/g, '&'))
+          .join('?');
+
+        window.history.replaceState(null, '', location.pathname.slice(0, -1) + decoded + location.hash);
+      })(window.location);
+    </script>
     <title>resume</title>
     <script type="module" crossorigin src="/resume/assets/index-BJgs4UGP.js"></script>
     <link rel="stylesheet" crossorigin href="/resume/assets/index-DwlHTFow.css">
