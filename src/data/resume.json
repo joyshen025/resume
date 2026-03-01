@@ -1,33 +1,32 @@
 {
   "meta": {
-    "ownerName": "Joy Shen",
-    "location": "Taipei, Taiwan",
-    "email": "Joy.shen.dev@example.com",
-    "github": "https://github.com/example/joy-shen",
-    "website": "https://joyShen.dev",
+    "ownerName": "沈于驩 Joey Shen",
+    "location": "",
+    "email": "",
+    "github": "",
+    "website": "",
     "defaultLocale": "zh-TW",
     "supportedLocales": [
-      "zh-TW",
       "en-US"
     ],
     "jobTitle": {
-      "zh-TW": "前端工程師 / HIS 流程系統開發",
-      "en-US": "Frontend Engineer / HIS Workflow Specialist"
+      "zh-TW": "前端工程師 / 醫療 HIS 系統開發",
+      "en-US": "Frontend Engineer / Healthcare HIS"
     },
     "summary": {
-      "zh-TW": "把履歷做成產品，展示的不只 UI，還包含流程、資料模型、權限與可維護性。",
-      "en-US": "This portfolio treats a resume as a product and demonstrates UI, flow design, data modeling, access control, and maintainability."
+      "zh-TW": "具有 2 年以上醫療 HIS 系統前端開發經驗，熟悉大型醫療流程與高複雜度表單；擅長 Vue 3/Quasar 元件重構、API 串接與效能優化，並能配合團隊流程進行功能開發與問題追蹤。",
+      "en-US": "2+ years of healthcare HIS frontend experience, focusing on complex clinical workflows and forms, Vue 3/Quasar refactoring, API integration, and performance optimization."
     },
     "introLines": {
       "zh-TW": [
         "npm run dev",
-        "載入工程師作品履歷系統...",
-        "展示前端能力 + 實務流程能力"
+        "載入醫療 HIS 前端作品履歷系統...",
+        "展示 Vue/Quasar + 流程整合 + 可維護性"
       ],
       "en-US": [
         "npm run dev",
-        "Booting engineer portfolio system...",
-        "Showcasing frontend + workflow delivery"
+        "Booting healthcare HIS frontend portfolio system...",
+        "Showcasing Vue/Quasar + workflow delivery + maintainability"
       ]
     }
   },
@@ -105,87 +104,95 @@
     },
     {
       "id": "2",
-      "name": "Quasar",
+      "name": "Quasar Framework",
       "category": "frontend"
     },
     {
       "id": "3",
-      "name": "REST API",
+      "name": "Axios",
       "category": "integration"
     },
     {
       "id": "4",
-      "name": "RBAC",
-      "category": "security"
+      "name": "RESTful API",
+      "category": "integration"
     },
     {
       "id": "5",
-      "name": "i18n",
-      "category": "global"
+      "name": "OData Filter",
+      "category": "integration"
     }
   ],
   "experiences": [
     {
       "id": "exp-01",
-      "start": "2023-08",
+      "start": "2024-05",
       "end": null,
-      "company": "MedFlow HIS Team",
+      "company": "合華科技有限公司",
       "role": {
         "zh-TW": "前端工程師",
         "en-US": "Frontend Engineer"
       },
       "summary": {
-        "zh-TW": "主導 HIS 前端模組重構，將病歷表單流程拆分為可配置元件。",
-        "en-US": "Led the HIS frontend refactor and converted clinical form flows into configurable modules."
+        "zh-TW": "負責醫療資訊系統（HIS）前端開發與功能優化，涵蓋門診掛號、報到、看診流程與醫療表單管理，並配合院內流程進行客製化 UI/UX 與邏輯實作。",
+        "en-US": "Developed and optimized a healthcare HIS frontend covering registration, check-in, clinical workflows, and complex form modules with customized UI/UX and business logic."
       },
       "highlights": [
         {
-          "zh-TW": "建立可重用表單引擎，開發效率提升 35%",
-          "en-US": "Built a reusable form engine that improved delivery speed by 35%"
+          "zh-TW": "串接健保卡讀卡機：處理讀寫卡流程、資料解析與錯誤防呆，確保前端流程與硬體穩定整合",
+          "en-US": "Integrated NHI card reader: implemented read/write flow, parsing, and robust error handling"
         },
         {
-          "zh-TW": "整合 API 權限驗證，降低錯單與誤操作",
-          "en-US": "Integrated permission-aware API workflows to reduce invalid operations"
+          "zh-TW": "實作看診狀態控管與資格審核：依身分與就醫類型動態調整流程與畫面呈現，降低誤操作",
+          "en-US": "Built visit-state control and eligibility checks with dynamic UI/flow by identity and visit type"
+        },
+        {
+          "zh-TW": "重構 Vue/Quasar 元件與表單：降低重複邏輯、提升可維護性，並改善大型表單渲染與表格操作體驗",
+          "en-US": "Refactored Vue/Quasar components and complex forms to reduce duplication and improve UX/performance"
+        },
+        {
+          "zh-TW": "優化 API 呼叫流程：避免重複請求造成效能下降，並改善資料處理方式",
+          "en-US": "Optimized API calling patterns to prevent duplicate requests and improve data handling"
         }
       ]
     },
     {
       "id": "exp-02",
-      "start": "2021-03",
-      "end": "2023-07",
-      "company": "Smart Clinic Platform",
-      "role": {
-        "zh-TW": "前端開發工程師",
-        "en-US": "Frontend Developer"
-      },
-      "summary": {
-        "zh-TW": "負責預約與排程系統 UI，串接院內系統資料並優化使用流程。",
-        "en-US": "Built appointment and scheduling UI and integrated internal hospital systems."
-      },
-      "highlights": [
-        {
-          "zh-TW": "導入狀態看板，客服工單回報時間縮短 25%",
-          "en-US": "Introduced dashboard views and reduced support response time by 25%"
-        }
-      ]
-    },
-    {
-      "id": "exp-03",
-      "start": "2019-05",
-      "end": "2021-02",
-      "company": "Digital Product Lab",
+      "start": "2023-04",
+      "end": "2024-01",
+      "company": "匯百川科技有限公司",
       "role": {
         "zh-TW": "前端工程師",
         "en-US": "Frontend Engineer"
       },
       "summary": {
-        "zh-TW": "參與多租戶 SaaS 表單產品，建立共用元件與 i18n 機制。",
-        "en-US": "Contributed to a multi-tenant SaaS form product and built shared UI components with i18n."
+        "zh-TW": "",
+        "en-US": ""
       },
       "highlights": [
         {
-          "zh-TW": "導入設計系統，跨專案重用率提升",
-          "en-US": "Introduced a design system and increased cross-project reuse"
+          "zh-TW": "熟悉 Git / GitHub / SourceTree 協作流程，配合團隊進行功能開發與問題追蹤",
+          "en-US": "Worked with Git/GitHub/SourceTree in team workflows for feature delivery and issue tracking"
+        }
+      ]
+    },
+    {
+      "id": "exp-03",
+      "start": "2023-10",
+      "end": "2024-01",
+      "company": "五泰房仲（廣告行銷部）",
+      "role": {
+        "zh-TW": "前端工程師",
+        "en-US": "Frontend Engineer"
+      },
+      "summary": {
+        "zh-TW": "ERP系統的重構及規劃",
+        "en-US": ""
+      },
+      "highlights": [
+        {
+          "zh-TW": "具備問題分析與重構習慣，能獨立完成專案建置、維護與功能開發",
+          "en-US": "Strong problem analysis and refactoring mindset; able to build and maintain features independently"
         }
       ]
     }
@@ -193,44 +200,58 @@
   "projects": [
     {
       "id": "project-01",
-      "slug": "his-form-builder",
+      "slug": "his-system-development",
       "title": {
-        "zh-TW": "HIS 表單引擎重構",
-        "en-US": "HIS Form Engine Revamp"
+        "zh-TW": "醫療系統 HIS 開發",
+        "en-US": "Healthcare HIS Development"
       },
       "summary": {
-        "zh-TW": "把病歷表單做成可配置流程，降低重複開發成本。",
-        "en-US": "Turned clinical forms into configurable flows to reduce repeated implementation."
+        "zh-TW": "負責 HIS 前端開發與功能優化，涵蓋門診掛號、報到、看診流程與醫療表單管理，並配合院內流程進行客製化 UI/UX 與邏輯實作。",
+        "en-US": "Developed and optimized HIS frontend workflows including registration, check-in, clinical flow, and complex medical forms with customized UI/UX and business logic."
       },
       "problem": {
-        "zh-TW": "每個科別都有獨立表單流程，需求變動時維護成本高。",
-        "en-US": "Each department had isolated form logic, making change requests expensive."
+        "zh-TW": "大型醫療流程與高複雜度表單需兼顧效能與操作流暢度，且需整合硬體（健保卡讀卡機）與多種院內系統 API，任何流程不一致都可能造成櫃檯中斷或誤操作。",
+        "en-US": "Complex clinical workflows and large forms required both performance and smooth UX, integrating hardware (NHI card reader) and multiple internal APIs; inconsistency could interrupt operations."
       },
       "solution": {
-        "zh-TW": "以 JSON schema + 元件映射重建流程，支援欄位規則與權限。",
-        "en-US": "Rebuilt flows with JSON schema + component mapping, including rules and permissions."
+        "zh-TW": "以 Vue 3/Quasar 建立可維護的元件與表單結構，整合健保卡讀寫卡流程（解析/防呆/錯誤處理），並優化 API 呼叫與資料處理策略，避免重複請求與狀態不同步；同時整理共用元件與樣式規範提升一致性。",
+        "en-US": "Built maintainable Vue 3/Quasar components and form structure, integrated NHI card read/write flows (parsing/validation/error handling), optimized API/data strategy to prevent duplicates and state drift, and established shared UI/style standards."
       },
       "impact": [
         {
-          "zh-TW": "平均需求交付時間從 8 天降到 5 天",
-          "en-US": "Average delivery time dropped from 8 days to 5 days"
+          "zh-TW": "健保卡讀寫卡流程穩定化：降低錯誤與操作中斷風險",
+          "en-US": "Stabilized NHI card read/write flows, reducing failure risk"
         },
         {
-          "zh-TW": "降低重複程式碼，提升可維護性",
-          "en-US": "Reduced duplicated code and improved maintainability"
+          "zh-TW": "API 呼叫流程優化：避免重複請求造成效能下降，提升操作流暢度",
+          "en-US": "Optimized API calls to prevent duplicates and improve performance"
+        },
+        {
+          "zh-TW": "元件/樣式規範化：降低重複邏輯與維護成本，提升一致性與擴充性",
+          "en-US": "Standardized components/styles to reduce duplication and improve maintainability"
+        },
+        {
+          "zh-TW": "改善大型表單渲染與表格操作體驗",
+          "en-US": "Improved UX and rendering for large forms and tables"
         }
       ],
       "tech": [
         "Vue 3",
-        "Quasar",
-        "REST API",
-        "JSON Schema",
-        "RBAC"
+        "JavaScript",
+        "Quasar Framework",
+        "Axios",
+        "RESTful API",
+        "OData Filter",
+        "Git",
+        "RWD"
       ],
       "domainTags": [
         "HIS",
         "Workflow",
-        "Form"
+        "Form",
+        "Device Integration",
+        "Performance",
+        "Maintainability"
       ],
       "versions": [
         "frontend",
@@ -238,190 +259,31 @@
         "global"
       ],
       "featured": true,
-      "updatedAt": "2026-01-31",
+      "updatedAt": "",
       "activity": {
-        "commits": 128,
-        "last30Days": 22
+        "commits": 0,
+        "last30Days": 0
       },
       "links": {
-        "github": "https://github.com/example/his-form-builder",
-        "demo": "https://demo.example.com/his-form-builder"
+        "github": "",
+        "demo": ""
       },
       "shots": [
         {
-          "name": "Designer",
-          "url": "/vite.svg"
+          "name": "Registration / Check-in / Visit Flow",
+          "url": ""
         },
         {
-          "name": "Permission Matrix",
-          "url": "/vite.svg"
-        }
-      ]
-    },
-    {
-      "id": "project-02",
-      "slug": "project-command-center",
-      "title": {
-        "zh-TW": "專案監控中台",
-        "en-US": "Project Command Center"
-      },
-      "summary": {
-        "zh-TW": "整合專案狀態、風險與版本紀錄，讓跨部門同步更清晰。",
-        "en-US": "Unified project status, risks, and release notes for clear cross-team alignment."
-      },
-      "problem": {
-        "zh-TW": "進度資訊分散在多個系統，主管難以即時掌握。",
-        "en-US": "Progress data was spread across multiple tools with low real-time visibility."
-      },
-      "solution": {
-        "zh-TW": "建立 API 聚合層與可篩選 dashboard，支持角色化檢視。",
-        "en-US": "Built an API aggregation layer and role-based filterable dashboards."
-      },
-      "impact": [
+          "name": "Complex Medical Forms",
+          "url": ""
+        },
         {
-          "zh-TW": "每週狀態會議準備時間縮短 40%",
-          "en-US": "Cut weekly status prep time by 40%"
-        }
-      ],
-      "tech": [
-        "Vue 3",
-        "Vite",
-        "Chart",
-        "Axios"
-      ],
-      "domainTags": [
-        "Dashboard",
-        "Management"
-      ],
-      "versions": [
-        "frontend",
-        "global"
-      ],
-      "featured": true,
-      "updatedAt": "2025-12-14",
-      "activity": {
-        "commits": 96,
-        "last30Days": 11
-      },
-      "links": {
-        "github": "https://github.com/example/project-command-center",
-        "demo": "https://demo.example.com/project-command-center"
-      },
-      "shots": [
+          "name": "NHI Card Reader Flow",
+          "url": ""
+        },
         {
-          "name": "Metrics",
-          "url": "/vite.svg"
-        }
-      ]
-    },
-    {
-      "id": "project-03",
-      "slug": "clinic-intake-flow",
-      "title": {
-        "zh-TW": "門診報到流程優化",
-        "en-US": "Clinic Intake Flow Optimization"
-      },
-      "summary": {
-        "zh-TW": "重整門診報到流程與狀態邏輯，降低櫃檯溝通成本。",
-        "en-US": "Refactored intake state transitions to reduce front-desk coordination overhead."
-      },
-      "problem": {
-        "zh-TW": "病患狀態切換繁瑣，容易出現資料不同步。",
-        "en-US": "Patient status transitions were brittle and often became inconsistent."
-      },
-      "solution": {
-        "zh-TW": "建立狀態機模型並以可視化時間線呈現處理進度。",
-        "en-US": "Built a state-machine model and visual timeline for processing stages."
-      },
-      "impact": [
-        {
-          "zh-TW": "櫃檯回報錯誤率下降 28%",
-          "en-US": "Reduced front-desk reporting errors by 28%"
-        }
-      ],
-      "tech": [
-        "Vue 3",
-        "State Machine",
-        "REST API"
-      ],
-      "domainTags": [
-        "HIS",
-        "Patient Flow"
-      ],
-      "versions": [
-        "frontend",
-        "medical"
-      ],
-      "featured": false,
-      "updatedAt": "2025-10-05",
-      "activity": {
-        "commits": 72,
-        "last30Days": 4
-      },
-      "links": {
-        "github": "https://github.com/example/clinic-intake-flow",
-        "demo": "https://demo.example.com/clinic-intake-flow"
-      },
-      "shots": [
-        {
-          "name": "Timeline",
-          "url": "/vite.svg"
-        }
-      ]
-    },
-    {
-      "id": "project-04",
-      "slug": "multilingual-resume-cms",
-      "title": {
-        "zh-TW": "多語系履歷 CMS",
-        "en-US": "Multilingual Resume CMS"
-      },
-      "summary": {
-        "zh-TW": "以 JSON + localStorage 模擬後台，支援多版本履歷內容管理。",
-        "en-US": "Mocked an admin backend with JSON + localStorage for multilingual resume version management."
-      },
-      "problem": {
-        "zh-TW": "一般履歷無法快速切換職務版本與語言。",
-        "en-US": "A static resume cannot quickly switch roles, versions, or languages."
-      },
-      "solution": {
-        "zh-TW": "設計前台 + 後台流程，加入登入、編輯、排序與列印。",
-        "en-US": "Designed public and admin flows with auth, editing, sorting, and print support."
-      },
-      "impact": [
-        {
-          "zh-TW": "面試展示可直接切換情境，提升溝通效率",
-          "en-US": "Scenario switching during interviews made communication faster"
-        }
-      ],
-      "tech": [
-        "Vue 3",
-        "Vue Router",
-        "LocalStorage",
-        "i18n"
-      ],
-      "domainTags": [
-        "Portfolio",
-        "CMS"
-      ],
-      "versions": [
-        "frontend",
-        "global"
-      ],
-      "featured": true,
-      "updatedAt": "2026-02-12",
-      "activity": {
-        "commits": 44,
-        "last30Days": 18
-      },
-      "links": {
-        "github": "https://github.com/example/multilingual-resume-cms",
-        "demo": "https://demo.example.com/multilingual-resume-cms"
-      },
-      "shots": [
-        {
-          "name": "Admin",
-          "url": "/vite.svg"
+          "name": "Permission / State Control",
+          "url": ""
         }
       ]
     }
@@ -553,8 +415,8 @@
         "en-US": "Experience Timeline"
       },
       "description": {
-        "zh-TW": "從 SaaS 表單產品到醫療 HIS，重點是把流程抽象成可重用模組",
-        "en-US": "From SaaS forms to healthcare HIS, focused on reusable workflow modules"
+        "zh-TW": "以醫療 HIS 為核心，聚焦大型流程整合、表單開發、元件重構與效能優化",
+        "en-US": "Focused on healthcare HIS: workflow integration, complex forms, refactoring, and performance optimization"
       }
     },
     "projectDetail": {
